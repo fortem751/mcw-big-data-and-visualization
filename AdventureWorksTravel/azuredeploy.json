@@ -12,6 +12,13 @@
     "siteLocation": {
       "type": "string"
     },
+    "sku": {
+      "type": "string",
+      "allowedValues": [
+        "S1"
+      ],
+      "defaultValue": "S1"
+    },
     "workerSize": {
       "type": "string",
       "allowedValues": [
