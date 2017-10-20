@@ -51,7 +51,7 @@
 
   "resources": [
     {
-      "apiVersion": "2014-06-01",
+      "apiVersion": "2016-09-01",
       "name": "[parameters('hostingPlanName')]",
       "type": "Microsoft.Web/serverfarms",
       "location": "[parameters('siteLocation')]",
@@ -63,7 +63,7 @@
       }
     },
     {
-      "apiVersion": "2014-06-01",
+      "apiVersion": "2015-08-01",
       "name": "[parameters('siteName')]",
       "type": "Microsoft.Web/sites",
       "location": "[parameters('siteLocation')]",
@@ -72,11 +72,31 @@
       ],
       "properties": {
         "name": "[parameters('siteName')]",
-        "serverFarm": "[parameters('hostingPlanName')]"
+        "serverFarmId": "[parameters('hostingPlanName')]",
+        "siteConfig": {
+          "appSettings": [
+            {
+              "name": "mlApiKey",
+              "value": "[parameters('mlApiKey')]"
+            },
+            {
+              "name": "mlWorkspaceId",
+              "value": "[parameters('mlWorkspaceId')]"
+            },
+            {
+              "name": "mlServiceId",
+              "value": "[parameters('mlServiceId')]"
+            },
+            {
+              "name": "weatherApiKey",
+              "value": "[parameters('weatherApiKey')]"
+            }
+          ]
+        }
       },
       "resources": [
         {
-          "apiVersion": "2014-04-01",
+          "apiVersion": "2015-08-01",
           "type": "config",
           "name": "web",
           "dependsOn": [
@@ -104,7 +124,7 @@
           }
         },
         {
-          "apiVersion": "2014-04-01",
+          "apiVersion": "2015-08-01",
           "name": "web",
           "type": "sourcecontrols",
           "dependsOn": [
